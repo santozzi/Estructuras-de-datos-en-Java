@@ -1,4 +1,4 @@
-package TDAGrafo;
+package TDAGrafo.Vertices;
 
 import TDALista.Position;
 import TDAMap.OpenHashMap;

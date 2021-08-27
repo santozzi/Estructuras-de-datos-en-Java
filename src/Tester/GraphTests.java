@@ -1,4 +1,4 @@
-package TDAGrafo;
+package Tester;
 
 // Librerías JUNIT
 import static org.junit.Assert.*;
@@ -8,6 +8,13 @@ import org.junit.Test;
 
 // Estructura a testear
 import TDAGrafo.*;
+import TDAGrafo.Arcos.Edge;
+import TDAGrafo.Excepciones.InvalidEdgeException;
+import TDAGrafo.Excepciones.InvalidVertexException;
+import TDAGrafo.Implementaciones.Graph.ListaDeAdyacenciaGraph;
+import TDAGrafo.Implementaciones.Graph.MatrizDeAdyacenciaGrafo;
+import TDAGrafo.Vertices.Vertex;
+
 import java.util.Iterator;
 
 /**
@@ -25,7 +32,7 @@ public class GraphTests {
 
 	// OBJETOS DE PRUEBA
 
-	private GraphD<Object, Object> graph;
+	private Graph<Object, Object> graph;
 	private Object o1;
 
 	// INICIALIZACIÓN Y LIMPIEZA DE OBJETOS PARA LAS PRUEBAS
@@ -36,7 +43,7 @@ public class GraphTests {
 	 */
 	@Before
 	public void setUp() {
-		graph = new ListaDeAdyacenciaGraphD<Object, Object>(); // cambiar esta línea para probar
+		graph = new MatrizDeAdyacenciaGrafo<Object, Object>(); // cambiar esta línea para probar
 												// distintas implementaciones
 		o1 = new Object();
 	}

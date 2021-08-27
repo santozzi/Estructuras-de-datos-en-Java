@@ -1,5 +1,11 @@
 
 package TDAGrafo;
+
+import TDAGrafo.Arcos.Edge;
+import TDAGrafo.Excepciones.InvalidEdgeException;
+import TDAGrafo.Excepciones.InvalidVertexException;
+import TDAGrafo.Vertices.Vertex;
+
 /**
  * Interface Grafo para grafos dirigidos.
  * @author Cátedra de Estructuras de Datos, Departamento de Cs. e Ing. de la Computación, UNS.

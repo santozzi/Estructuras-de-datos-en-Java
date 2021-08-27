@@ -1,5 +1,6 @@
-package TDAGrafo;
+package TDAGrafo.Vertices;
 
+import TDAGrafo.DecorablePosition;
 import TDALista.Position;
 import TDAMap.OpenHashMap;
 

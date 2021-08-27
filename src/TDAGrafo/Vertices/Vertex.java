@@ -1,7 +1,6 @@
-package TDAGrafo;
+package TDAGrafo.Vertices;
 
-import TDALista.Position;
-
+import TDAGrafo.DecorablePosition;
 public interface Vertex<V> extends DecorablePosition<V> {
 
 }

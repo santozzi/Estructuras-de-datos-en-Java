@@ -1,5 +1,6 @@
 package TDAGrafo;
 
+import TDAGrafo.Vertices.Vertex;
 import TDALista.DoubleLinkedList;
 import TDALista.PositionList;
 

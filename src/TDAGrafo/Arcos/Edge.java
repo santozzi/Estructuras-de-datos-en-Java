@@ -1,4 +1,4 @@
-package TDAGrafo;
+package TDAGrafo.Arcos;
 
 import TDALista.Position;
 

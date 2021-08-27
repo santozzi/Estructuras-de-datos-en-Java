@@ -1,5 +1,6 @@
-package TDAGrafo;
+package TDAGrafo.Vertices;
 
+import TDAGrafo.Arcos.ArcoAd;
 import TDALista.DoubleLinkedList;
 import TDALista.Position;
 import TDALista.PositionList;

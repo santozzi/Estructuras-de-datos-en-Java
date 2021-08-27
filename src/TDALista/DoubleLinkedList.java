@@ -2,7 +2,7 @@ package TDALista;
 
 import java.util.Iterator;
 
-import TDAGrafo.Vertex;
+import TDAGrafo.Vertices.Vertex;
 
 public class DoubleLinkedList<E> implements PositionList<E> {
     protected int size;

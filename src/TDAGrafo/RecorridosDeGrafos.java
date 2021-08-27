@@ -5,6 +5,10 @@ import java.util.Iterator;
 import TDACola.EmptyQueueException;
 import TDACola.LinkedQueue;
 import TDACola.Queue;
+import TDAGrafo.Arcos.Edge;
+import TDAGrafo.Excepciones.InvalidEdgeException;
+import TDAGrafo.Excepciones.InvalidVertexException;
+import TDAGrafo.Vertices.Vertex;
 import TDALista.DoubleLinkedList;
 import TDALista.EmptyListException;
 import TDALista.InvalidPositionException;
@@ -165,6 +169,8 @@ public class RecorridosDeGrafos {
 
 	}
 
+	
+	@SuppressWarnings("hiding")
 	public static <V,Integer> void hallarCaminoMinimo(Graph<V,Integer> g, Vertex<V>origen, Vertex<V> destino,
 			ResultadoCamino<V>actual, ResultadoCamino<V> minimo)
 	{

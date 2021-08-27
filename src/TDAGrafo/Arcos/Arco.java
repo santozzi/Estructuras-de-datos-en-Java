@@ -1,5 +1,6 @@
-package TDAGrafo;
+package TDAGrafo.Arcos;
 
+import TDAGrafo.Vertices.Vertice;
 import TDALista.Position;
 
 public class Arco<V,E> implements Edge<E> {
@@ -17,8 +18,6 @@ public class Arco<V,E> implements Edge<E> {
 		this(null,v1,v2,rotulo);
 	
 	}
-    
-    
     
 	public Position<Arco<V, E>> getPos() {
 		return pos;

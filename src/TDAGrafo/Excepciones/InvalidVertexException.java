@@ -1,4 +1,4 @@
-package TDAGrafo;
+package TDAGrafo.Excepciones;
 
 @SuppressWarnings("serial")
 public class InvalidVertexException extends Exception {

@@ -1,18 +1,26 @@
-package TDAGrafo;
+package TDAGrafo.Implementaciones.Graph;
 
 import java.util.Iterator;
 
+import TDAGrafo.Graph;
+
+import TDAGrafo.Arcos.ArcoAd;
+import TDAGrafo.Arcos.Edge;
+import TDAGrafo.Excepciones.InvalidEdgeException;
+import TDAGrafo.Excepciones.InvalidVertexException;
+import TDAGrafo.Vertices.Vertex;
+import TDAGrafo.Vertices.VerticeAd;
 import TDALista.DoubleLinkedList;
 import TDALista.EmptyListException;
 import TDALista.InvalidPositionException;
 import TDALista.PositionList;
 
-public class ListaDeAdyacenciaGraphD<V, E> implements GraphD<V, E> {
+public class ListaDeAdyacenciaGraph<V, E> implements Graph<V, E> {
 	protected PositionList<VerticeAd<V,E>> nodos;
 	protected PositionList<ArcoAd<V,E>> arcos;
 
 
-	public ListaDeAdyacenciaGraphD() {
+	public ListaDeAdyacenciaGraph() {
 		this.nodos = new DoubleLinkedList<VerticeAd<V,E>>();
 		this.arcos = new DoubleLinkedList<ArcoAd<V,E>>();
 	}
@@ -36,7 +44,7 @@ public class ListaDeAdyacenciaGraphD<V, E> implements GraphD<V, E> {
 	@Override
 	
 	
-/*	
+	
 	public Iterable<Edge<E>> incidentEdges(Vertex<V> v) throws InvalidVertexException {
 		VerticeAd<V,E> nodo = checkVertex(v);
 		PositionList<Edge<E>> lista = new DoubleLinkedList<Edge<E>>();
@@ -48,22 +56,13 @@ public class ListaDeAdyacenciaGraphD<V, E> implements GraphD<V, E> {
 
 		return lista;
 	}
-	}*/
+	
 	
 
-	public Iterable<Edge<E>> incidentEdges(Vertex<V> v) throws InvalidVertexException {
-		VerticeAd<V,E> nodo = checkVertex(v);
-		PositionList<Edge<E>> lista = new DoubleLinkedList<Edge<E>>();
-		for(ArcoAd<V,E> arco : nodo.getListaAdyacencia()) {
-			if(arco.getV2()==nodo) {
-				lista.addLast(arco);
-			}
-		}
-
-		return lista;
-		}
 	
-	private VerticeAd<V,E> checkVertex(Vertex<V> v)throws InvalidVertexException{
+	
+	@SuppressWarnings("unchecked")
+	protected VerticeAd<V,E> checkVertex(Vertex<V> v)throws InvalidVertexException{
 		VerticeAd<V,E> nodo= null;
 		if(v==null|| nodos.isEmpty()) {
 			throw new InvalidVertexException("vertice invalido");
@@ -77,7 +76,8 @@ public class ListaDeAdyacenciaGraphD<V, E> implements GraphD<V, E> {
 		return nodo;
 	}
 
-	private ArcoAd<V,E> checkEdge(Edge<E> e)throws InvalidEdgeException{
+	@SuppressWarnings("unchecked")
+	protected ArcoAd<V,E> checkEdge(Edge<E> e)throws InvalidEdgeException{
 		ArcoAd<V,E> arco = null;
 		if(e==null || arcos.isEmpty()) {
 			throw new InvalidEdgeException("arco invalido");
@@ -94,7 +94,7 @@ public class ListaDeAdyacenciaGraphD<V, E> implements GraphD<V, E> {
 		}
 		return arco;
 	}
-
+/*
 	@Override
 	public Iterable<Edge<E>> succesorEdges(Vertex<V> v) throws InvalidVertexException {
 		VerticeAd<V,E> nodo = checkVertex(v);
@@ -107,7 +107,7 @@ public class ListaDeAdyacenciaGraphD<V, E> implements GraphD<V, E> {
 
 		return lista;
 	}
-
+*/
 	@Override
 	public Vertex<V> opposite(Vertex<V> v, Edge<E> e) throws InvalidVertexException, InvalidEdgeException {
 		VerticeAd<V,E> nodo = checkVertex(v);
@@ -127,6 +127,7 @@ public class ListaDeAdyacenciaGraphD<V, E> implements GraphD<V, E> {
 	@Override
 	public Vertex<V>[] endvertices(Edge<E> e) throws InvalidEdgeException {
 		ArcoAd<V,E> arco = checkEdge(e);
+		@SuppressWarnings("unchecked")
 		Vertex<V>[] aRetornar = (Vertex<V>[]) new Vertex[2];
 		aRetornar[0] = arco.getV1();
 		aRetornar[1] = arco.getV2();
@@ -231,8 +232,7 @@ public class ListaDeAdyacenciaGraphD<V, E> implements GraphD<V, E> {
 			arco.setPosicionEnListaAdyacenciaV1(null);
 			arco.setPosicionEnListaAdyacenciaV2(null);
 		} catch (InvalidPositionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		arco.setV1(null);
 		arco.setV2(null);

@@ -1,17 +1,24 @@
-package TDAGrafo;
+package TDAGrafo.Implementaciones.Graph;
 
 import java.util.Iterator;
 
+import TDAGrafo.Graph;
+import TDAGrafo.Arcos.Arco;
+import TDAGrafo.Arcos.Edge;
+import TDAGrafo.Excepciones.InvalidEdgeException;
+import TDAGrafo.Excepciones.InvalidVertexException;
+import TDAGrafo.Vertices.Vertex;
+import TDAGrafo.Vertices.Vertice;
 import TDALista.DoubleLinkedList;
 import TDALista.EmptyListException;
 import TDALista.InvalidPositionException;
 import TDALista.PositionList;
 
-public class ListaDeArcosGraphD<V, E> implements Graph<V, E> {
+public class ListaDeArcosGraph<V, E> implements Graph<V, E> {
 	protected PositionList<Vertice<V>> nodos;
 	protected PositionList<Arco<V,E>> arcos;
 
-	public ListaDeArcosGraphD() {
+	public ListaDeArcosGraph() {
 		nodos = new DoubleLinkedList<Vertice<V>>();
 		arcos = new DoubleLinkedList<Arco<V,E>>();
 	}
@@ -50,7 +57,7 @@ public class ListaDeArcosGraphD<V, E> implements Graph<V, E> {
 	
 	
 	
-	private Vertice<V> checkVertex(Vertex<V> v)throws InvalidVertexException{
+	protected Vertice<V> checkVertex(Vertex<V> v)throws InvalidVertexException{
 		Vertice<V> nodo = null;
 		if(v==null ||nodos.isEmpty()) {
 			throw new InvalidVertexException("Vertice invalido");
@@ -65,7 +72,9 @@ public class ListaDeArcosGraphD<V, E> implements Graph<V, E> {
 		return nodo	;
 	}
 
-	private Arco<V,E> checkEdge(Edge<E> e)throws InvalidEdgeException{
+
+	@SuppressWarnings("unchecked")
+	protected Arco<V,E> checkEdge(Edge<E> e)throws InvalidEdgeException{
 		Arco<V,E> arco = null;
 		if(e==null ||arcos.isEmpty()) {
 			throw new InvalidEdgeException("Arco invalido");
@@ -97,10 +106,11 @@ public class ListaDeArcosGraphD<V, E> implements Graph<V, E> {
 		
 		return aRetornar;
 	}
-
+    @SuppressWarnings("unchecked")
 	@Override
 	public Vertex<V>[] endvertices(Edge<E> e) throws InvalidEdgeException {
 		Arco<V,E> arco = checkEdge(e);
+		
 		Vertex<V>[] arreglo = (Vertex<V>[]) new Vertex[2];
 		arreglo[0]=arco.getV1();
 		arreglo[1]=arco.getV2();
@@ -163,10 +173,8 @@ public class ListaDeArcosGraphD<V, E> implements Graph<V, E> {
 		try {
 			nuevo.setPos(arcos.last());
 		} catch (EmptyListException e1) {
-			// TODO Auto-generated catch block
 			System.out.println(e1.getMessage());
 		}
-		System.out.println(arcos.size());
 		return nuevo;
 	}
 
@@ -185,8 +193,7 @@ public class ListaDeArcosGraphD<V, E> implements Graph<V, E> {
 			nodo.setRotulo(null);
 			nodo.setPos(null);
 		} catch (InvalidPositionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		
 		
@@ -211,8 +218,7 @@ public class ListaDeArcosGraphD<V, E> implements Graph<V, E> {
 	    	   arco.setPos(null);
 	    	   arco.setRotulo(null);
 		} catch (InvalidPositionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	     
 	    return aRetornar;  

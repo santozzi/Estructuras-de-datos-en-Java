@@ -1,5 +1,6 @@
-package TDAGrafo;
+package TDAGrafo.Arcos;
 
+import TDAGrafo.Vertices.VerticeAd;
 import TDALista.Position;
 
 public class ArcoAd<V, E> implements Edge<E> {

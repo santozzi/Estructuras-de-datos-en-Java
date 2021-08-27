@@ -1,19 +1,17 @@
 package Tester;
 
-import TDAGrafo.Edge;
 import TDAGrafo.Graph;
-import TDAGrafo.GraphD;
-import TDAGrafo.InvalidVertexException;
-import TDAGrafo.ListaDeAdyacenciaGraphD;
-import TDAGrafo.ListaDeArcosGraph;
 import TDAGrafo.RecorridosDeGrafos;
 import TDAGrafo.ResultadoCamino;
-import TDAGrafo.Vertex;
+import TDAGrafo.Arcos.Edge;
+import TDAGrafo.Excepciones.InvalidVertexException;
+import TDAGrafo.Implementaciones.Graph.ListaDeArcosGraph;
+import TDAGrafo.Vertices.Vertex;
 import TDALista.DoubleLinkedList;
 import TDALista.PositionList;
 import TDAMap.InvalidKeyException;
 
-public class TesterDFS {
+public class TesterRecorridosDeGrafos {
 
     public static void main (String[] args) {
     	Graph<Integer,Integer> G = new ListaDeArcosGraph<Integer, Integer>();
