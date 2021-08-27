@@ -14,10 +14,8 @@ Estructura de datos: Pila, Cola, Lista, Arbol, Grafos.
     Evaluación de expresiones en notación postfija (notación polaca inversa).
     Reconocedores sintácticos de lenguajes independientes del contexto.
     Implementación de recursividad.
-    En un sistema operativo cada proceso tiene un espacio de memoria (pila) para almacenar valores y llamadas a funciones.
-    
+    En un sistema operativo cada proceso tiene un espacio de memoria (pila) para almacenar valores y llamadas a funciones.    
     Una pila acotada es una pila limitada a un tamaño máximo impuesto en su especificación.
-    
     Por analogía con objetos cotidianos, una operación apilar equivaldría a colocar un plato sobre una pila de platos, y una operación retirar equivaldría a retirarlo.
 
 
