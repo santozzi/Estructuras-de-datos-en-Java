@@ -25,3 +25,4 @@ hs_err_pid*
 #Eclipce config files
 .classpath
 .project
+.settings/
