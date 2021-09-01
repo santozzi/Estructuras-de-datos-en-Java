@@ -13,6 +13,7 @@ import TDALista.DoubleLinkedList;
 import TDALista.EmptyListException;
 import TDALista.InvalidPositionException;
 import TDALista.PositionList;
+import TDAMap.Entry;
 import TDAMap.InvalidKeyException;
 import TDAMap.Map;
 import TDAMap.OpenHashMap;
@@ -169,7 +170,7 @@ public class RecorridosDeGrafos {
 
 	}
 
-	
+
 	@SuppressWarnings("hiding")
 	public static <V,Integer> void hallarCaminoMinimo(Graph<V,Integer> g, Vertex<V>origen, Vertex<V> destino,
 			ResultadoCamino<V>actual, ResultadoCamino<V> minimo)
@@ -178,9 +179,9 @@ public class RecorridosDeGrafos {
 		try {
 			origen.put(ESTADO, VISITADO);
 			actual.getCamino().addLast(origen);
-		
+
 			if(origen==destino) {
-			
+
 
 				if(actual.getCosto()<minimo.getCosto()) {
 					minimo.setCosto(actual.getCosto());
@@ -211,12 +212,95 @@ public class RecorridosDeGrafos {
 
 	}
 
+	//Integer >0
+	@SuppressWarnings("hiding")
+	/**
+	 * Devuelve caminos minimos
+	 * @param <V> Tipo de elmento de vertice
+	 * @param <E> Tipo de elemento de arcos
+	 * @param g Grafo dirigido
+	 * @param origen Vertice de origen
+	 * @param d Mapeo de tipo Float para los costos de los caminos
+	 * @param p Mapeo de el Vertice anterior
+	 * @param s Mapeo para marcar visitado
+	 */
+	public static <V,E> void dijkstra(GraphD<V,Float> g, Vertex<V> origen,
+			Map<Vertex<V>,Float> d, Map<Vertex<V>,Vertex<V>> p, Map<Vertex<V>,Boolean> s) {
+		try {
+			//lleno los mapeso con los vertices
+			for(Vertex<V> nodo : g.vertices()) {
+
+				d.put(nodo,Float.MAX_VALUE);
+				p.put(nodo, null);
+
+			}
+
+			d.put(origen,0f);
+
+
+
+
+
+			int size = d.size();
+			for(int i=0; i< size; i++) {
+				float minimo =Float.MAX_VALUE;
+				Vertex<V> minimoV =null ;
+				for(Entry<Vertex<V>,Float> entrada : d.entries()) {
+
+					float peso = (float)entrada.getValue();
+
+					if(peso<minimo && (s.get(entrada.getKey())==null)) {
+						minimo=peso;
+						minimoV= entrada.getKey();
+					}
+				}
+				if(minimoV!=null) {
+					s.put(minimoV, true);
+					for(Edge<Float> adyacente: g.succesorEdges(minimoV)) {
+						Vertex<V> opuesto = g.opposite(minimoV, adyacente);
+						if((d.get(minimoV)+ adyacente.element())<d.get(opuesto)) {
+							d.put(opuesto,d.get(minimoV)+ adyacente.element());
+							System.out.println(opuesto.element()+" - "+ minimoV.element());
+							p.put(opuesto, minimoV);
+						}
+
+					}
+				}else {
+					System.out.println("el vertice es nulo mirar antes de agregar a S");
+				}
+
+			}
 
 
 
 
 
 
+		} catch (InvalidKeyException | InvalidVertexException | InvalidEdgeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+
+    public static <V> Queue<Vertex<V>> recuperarCamino(Map<Vertex<V>,Vertex<V>> caminos,Vertex<V> destino,Vertex<V> origen)throws InvalidKeyException{
+    	Queue<Vertex<V>> cola = new LinkedQueue<Vertex<V>>();
+    	
+    	recuperarCaminoRecu(caminos,destino,cola);
+    	
+    	return cola;
+    }
+    
+    private static <V> void recuperarCaminoRecu(Map<Vertex<V>,Vertex<V>> caminos,Vertex<V> destino,Queue<Vertex<V>> cola) throws InvalidKeyException{
+    	Vertex<V> anterior = destino;
+    	//pregunto si es la fuente
+    	if(anterior!=null) {
+    		recuperarCaminoRecu(caminos, caminos.get(destino), cola);
+    		cola.enqueue(anterior);
+    	}
+    	
+    }
+   
 
 
 

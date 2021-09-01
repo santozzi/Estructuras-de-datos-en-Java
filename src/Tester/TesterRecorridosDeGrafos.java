@@ -1,20 +1,37 @@
 package Tester;
 
+import TDACola.EmptyQueueException;
+import TDACola.Queue;
 import TDAGrafo.Graph;
+import TDAGrafo.GraphD;
 import TDAGrafo.RecorridosDeGrafos;
 import TDAGrafo.ResultadoCamino;
 import TDAGrafo.Arcos.Edge;
 import TDAGrafo.Excepciones.InvalidVertexException;
 import TDAGrafo.Implementaciones.Graph.ListaDeArcosGraph;
+import TDAGrafo.Implementaciones.GraphD.ListaDeArcosGraphD;
 import TDAGrafo.Vertices.Vertex;
 import TDALista.DoubleLinkedList;
 import TDALista.PositionList;
 import TDAMap.InvalidKeyException;
+import TDAMap.Map;
+import TDAMap.OpenHashMap;
 
 public class TesterRecorridosDeGrafos {
 
     public static void main (String[] args) {
     	Graph<Integer,Integer> G = new ListaDeArcosGraph<Integer, Integer>();
+    	GraphD<Character,Float> GDijkstra = new ListaDeArcosGraphD<Character,Float>();
+    	
+    	Vertex<Character> a = GDijkstra.insertVertex('a');
+    	Vertex<Character> b = GDijkstra.insertVertex('b');
+    	Vertex<Character> c = GDijkstra.insertVertex('c');
+    	Vertex<Character> d = GDijkstra.insertVertex('d');
+    	
+    	
+    	
+    	
+    	
     	Vertex<Integer> uno = G.insertVertex(1);
     	Vertex<Integer> dos = G.insertVertex(2);
     	Vertex<Integer> tres = G.insertVertex(3);
@@ -27,7 +44,15 @@ public class TesterRecorridosDeGrafos {
     	//Vertex<Integer> diez = G.insertVertex(10);
     	
     	try {
-			
+    		
+    		//arcos de GDijkstra
+    		
+    		
+			GDijkstra.insertEdge(a, c, 11f);
+			GDijkstra.insertEdge(a, b, 1f);
+			GDijkstra.insertEdge(c, d, 1f);
+			GDijkstra.insertEdge(b, d, 38f);
+			GDijkstra.insertEdge(b, c, 2f);
     		
 			Edge<Integer> a1 = G.insertEdge(uno, dos, 12);
 			//Edge<Integer> a10 = G.insertEdge(seis, dos, 1);
@@ -57,6 +82,13 @@ public class TesterRecorridosDeGrafos {
 			RecorridosDeGrafos.hallarCaminoMinimo(G,uno , ocho, actual, minimo);
 			limpiar(G);
 			RecorridosDeGrafos.BFS(G, uno, caminoBFS);
+			Map<Vertex<Character>,Float> costo = new OpenHashMap<Vertex<Character>, Float>();
+			Map<Vertex<Character>,Vertex<Character>> anterior = new OpenHashMap<Vertex<Character>, Vertex<Character>>();
+			Map<Vertex<Character>,Boolean> visitado = new OpenHashMap<Vertex<Character>, Boolean>();
+			
+			
+			RecorridosDeGrafos.dijkstra(GDijkstra, a, costo, anterior, visitado);
+			Queue<Vertex<Character>>  caminoMinimo = RecorridosDeGrafos.recuperarCamino(anterior, d, a);
 			
 			/*
 			 * 
@@ -119,7 +151,23 @@ public class TesterRecorridosDeGrafos {
 			}
 			System.out.println();
 			System.out.println("Costo del camino minimo: "+minimo.getCosto());
-		} catch (InvalidVertexException e) {
+			
+			
+			/*
+			 * 
+			 * 
+			 * CAMINO MINIMO DE a A d hallado con Dijkstra
+			 * 
+			 * 
+			 */
+			System.out.println();
+			System.out.println("CAMINO MINIMO DE a A d");
+			System.out.println("========================");
+			while(!caminoMinimo.isEmpty()) {
+				System.out.print("-" + caminoMinimo.dequeue().element());
+			}
+			System.out.println("-");
+		} catch (InvalidVertexException | InvalidKeyException | EmptyQueueException e) {
 			System.out.println(e.getMessage());
 		}
     	

@@ -177,6 +177,8 @@ public class MatrizDeAdyacenciaGrafo<V, E> implements Graph<V, E> {
 			if(cantidadDeVertices==adyacentes.length) {
 				resize();
 			}
+			
+			//cantidadDeVertices no hace lo que dice. cambiar nombre.
 			if(indicesDisponibles.isEmpty()) {
 			   nuevo.setIndice(cantidadDeVertices++);
 			}else {
@@ -193,10 +195,10 @@ public class MatrizDeAdyacenciaGrafo<V, E> implements Graph<V, E> {
 		return nuevo;
 	}
 
-	
+	@SuppressWarnings("unchecked")
 	protected void resize() {
 		final int tam =  adyacentes.length*2;  
-		@SuppressWarnings("unchecked")
+		
 		ArcoI<V,E>[][] adyacentesnuevo = (ArcoI<V,E>[][])new ArcoI[tam][tam];	
 		for(int i= 0; i<adyacentes.length;i++) {
 			for(int j= 0; j<adyacentes[0].length;j++) {
