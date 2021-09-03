@@ -38,6 +38,7 @@ public class ABB<E extends Comparable<E>> extends ArbolBinarioEnlazado<E> {
 			}
 		}
 	}
+	
 
 
 	public E eliminar(E elemento) {
@@ -188,7 +189,13 @@ public class ABB<E extends Comparable<E>> extends ArbolBinarioEnlazado<E> {
 				nodo.getLeft().getRotulo()==null&&
 				nodo.getRight().getRotulo()==null;
 	}
-
+  
+	/**
+	 * Insertar un elemento
+	 * @param element El elemento debe ser comparable
+	 * @return Devuelve verdadero si lo inserta y falso si el elemento ya existe
+	 */
+	
 	public boolean insertar(E element) {
        
 		return insertaAux(element,this.root);
@@ -196,12 +203,16 @@ public class ABB<E extends Comparable<E>> extends ArbolBinarioEnlazado<E> {
 	private boolean insertaAux(E rotulo, NodoABB<E> nodo){
 		if(nodo.getRotulo()==null) {
 			nodo.setRotulo(rotulo);
+			
+			//para que muestre por pantalla valores de testing
 			if(nodo==this.root)
 			System.out.println("soy raiz: "+rotulo);
 			else {
 				System.out.println("mi padre es: "+nodo.getParent().getRotulo());
 				System.out.println("mi rotulo: "+nodo.getRotulo());
 			}
+			
+			
 				expandir(nodo);
 			return true;
 

@@ -50,6 +50,7 @@ public class ArbolConLista<E> implements Tree<E> {
 		for(TNode<E> p:r.getHijos())
 			recPreorden(p,l);
 	}
+	
 
 	@Override
 	public Iterable<Position<E>> positions() {
@@ -61,6 +62,12 @@ public class ArbolConLista<E> implements Tree<E> {
 		return lista;
 	
 	}
+	
+	/**
+	 * Recorrido pre-orden del arbol
+	 * @param v
+	 * @param l
+	 */
 	private void pre (TNode<E> v,PositionList<Position<E>> l) {
 		l.addLast(v);
 		for(TNode<E> nodo : v.getHijos()) {
@@ -68,25 +75,25 @@ public class ArbolConLista<E> implements Tree<E> {
 		}
 
 	} 
-	private void inorderT (TNode<E> nodo , PositionList<Position<E>> lista) {
-		 /*
-		 
-		 • Algoritmo inorden( T, v )
-		 Si v es hoja en T entonces
-		 Visitar( T, v )
-		 Sino
-		 w  primer hijo de v en T
-		 inorden( T, w )
-		 Visitar(T, v)
-		 mientras w tiene hermano en T hacer
-		 w  hermano de w en T
-		 inorden( T, w )
-		 
-		  privat void inorder(v, ){
-		  }
-		 *
-		 */
+	
+	/**
+	 * Recorrido Pos-orden del arbol
+	 * @param v
+	 * @param l
+	 */
+	private void pos (TNode<E> v,PositionList<Position<E>> l) {
+		l.addLast(v);
+		for(TNode<E> nodo : v.getHijos()) {
+			pre(nodo,l);
+		}
+
 	}
+	
+	/**
+	 * Recorrido In-order
+	 * @param padre
+	 * @param lista
+	 */
 	private void  inorder ( TNode<E> padre , PositionList<Position<E>> lista) {
 		 PositionList<TNode<E>> hijos = padre.getHijos();
 		 try {
@@ -125,6 +132,12 @@ public class ArbolConLista<E> implements Tree<E> {
 				e.printStackTrace();
 			}
 		}
+	
+	/**
+	 * Recorrido por niveles
+	 * @param v
+	 * @param l
+	 */
 	private void porNiveles(TNode<E> v, PositionList<Position<E>> l) {
 	    Queue<TNode<E>> cola = new ArrayQueue<TNode<E>>();
 	    cola.enqueue(v);
